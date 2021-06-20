@@ -19,7 +19,7 @@ sdeint2 is a collection of numerical algorithms for integrating Ito and Stratono
 * `stratSRA3(f, G, y0, tspan)`: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRS2 for Stratonovich equations with additive noise.
 For more information and advanced options see the documentation for each function.
 
-##utility functions:
+## Utility Functions:
 
 Repeated integrals by the method of Mrongowius and Roessler (2021):
 * `Imr(dW, h, n=5)`: Approximate repeated Ito integrals.
