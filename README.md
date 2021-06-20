@@ -1,13 +1,12 @@
-sdeint2
-======
-| An extension of the [sdeint](https://github.com/mattja/sdeint) package.
+# sdeint2
 
-Overview
---------
+An extension of the [sdeint](https://github.com/mattja/sdeint) package.
+
+## Overview
 sdeint2 is a collection of numerical algorithms for integrating Ito and Stratonovich stochastic ordinary differential equations (SODEs).
 
-specific algorithms:
---------------------
+## Specific Algorithms:
+
 | ``itoMilstein(f, G, dxG, y0, tspan)``: the Milstein algorithm for Ito equations.
 | ``itoTamedEuler(f, G, y0, tspan)``: the drift-tamed Euler-Maruyama order 0.5 strong algorithm for Ito equations with globally one-sided Lipschitz condition on the drift
 | ``itoSRIC2(f, G, y0, tspan)``: the Rößler2010 order 1.0 strong Stochastic Runge-Kutta algorithm SRIC2 for Ito equations with commutative noise.
@@ -20,29 +19,27 @@ specific algorithms:
 | ``stratSRA3(f, G, y0, tspan)``: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRS2 for Stratonovich equations with additive noise.
 | For more information and advanced options see the documentation for each function.
 
-utility functions:
-~~~~~~~~~~~~~~~~~~
+##utility functions:
 
-| Repeated integrals by the method of Mrongowius and Roessler (2021):
-| ``Imr(dW, h, n=5)``: Approximate repeated Ito integrals.
-| ``Jmr(dW, h, n=5)``: Approximate repeated Stratonovich integrals.
+Repeated integrals by the method of Mrongowius and Roessler (2021):
+``Imr(dW, h, n=5)``: Approximate repeated Ito integrals.
+``Jmr(dW, h, n=5)``: Approximate repeated Stratonovich integrals.
 
 
-References for these algorithms:
---------------------------------
+## References for these algorithms:
 
-| ``itoMilstein``: 
-| G. N. Milstein (1974), Approximate integration of stochastic differential equations
-| ``itoSRIC2, itoSRID2, itoSRA3, stratSRA3, itoSRI2W1``: 
-| A. Rößler (2010) Runge-Kutta Methods for the Strong Approximation of Solutions of Stochastic Differential Equations
-| ``itoRI5``:
-| A. Roessler (2009) Second Order Runge-Kutta Methods For Ito Stochastic Differential Equations
-| ``itoTamedEuler``:
-| Hutzenthaler, Jentzen and Kloeden (2012) Strong Convergence of an explicit numerical method for SDEs with nonglobally Lipschitz continuous coefficients
-| ``Imr, Jmr``:
-| J. Mrongowius and A. Rössler (2021) On the Approximation and Simulation of Iterated Stochastic Integrals and the Corresponding Levy Areas in Terms of a Multidimensional Brownian Motion
+``itoMilstein``: 
+G. N. Milstein (1974), Approximate integration of stochastic differential equations
+``itoSRIC2, itoSRID2, itoSRA3, stratSRA3, itoSRI2W1``: 
+A. Rößler (2010) Runge-Kutta Methods for the Strong Approximation of Solutions of Stochastic Differential Equations
+``itoRI5``:
+A. Roessler (2009) Second Order Runge-Kutta Methods For Ito Stochastic Differential Equations
+``itoTamedEuler``:
+Hutzenthaler, Jentzen and Kloeden (2012) Strong Convergence of an explicit numerical method for SDEs with nonglobally Lipschitz continuous coefficients
+``Imr, Jmr``:
+J. Mrongowius and A. Rössler (2021) On the Approximation and Simulation of Iterated Stochastic Integrals and the Corresponding Levy Areas in Terms of a Multidimensional Brownian Motion
 
-# LICENCSE
+## LICENCSE
 Copyright 2021 Philip Schwedler
 
 This program is free software: you can redistribute it and/or modify
