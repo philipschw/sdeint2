@@ -8,15 +8,15 @@ sdeint2 is a collection of numerical algorithms for integrating Ito and Stratono
 ## Specific Algorithms:
 
 `itoMilstein(f, G, dxG, y0, tspan)`: the Milstein algorithm for Ito equations.
-``itoTamedEuler(f, G, y0, tspan)``: the drift-tamed Euler-Maruyama order 0.5 strong algorithm for Ito equations with globally one-sided Lipschitz condition on the drift
-``itoSRIC2(f, G, y0, tspan)``: the Rößler2010 order 1.0 strong Stochastic Runge-Kutta algorithm SRIC2 for Ito equations with commutative noise.
-``itoSRIC2(f, [g1,...,gm], y0, tspan)``: as above, with G matrix given as a separate function for each column (gives speedup for large m or complicated G).
-``itoSRID2(f, G, y0, tspan)``: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRID2 for Ito equations with diagonal noise.
-``itoSRA3(f, G, y0, tspan)``: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRA3 for Ito equations with additive noise.
-``itoSRI2W1(f, G, y0, tspan)``: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRI2W1 for Ito equations with scalar noise.
-``itoRI5(f, G, y0, tspan)``: the Rößler2010 order 2.0 weak Stochastic Runge-Kutta algorithm RI5 for Ito equations.
-``itoRI5(f, [g1,...,gm], y0, tspan)``: as above, with G matrix given as a separate function for each column (gives speedup for large m or complicated G).
-``stratSRA3(f, G, y0, tspan)``: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRS2 for Stratonovich equations with additive noise.
+`itoTamedEuler(f, G, y0, tspan)`: the drift-tamed Euler-Maruyama order 0.5 strong algorithm for Ito equations with globally one-sided Lipschitz condition on the drift
+`itoSRIC2(f, G, y0, tspan)`: the Rößler2010 order 1.0 strong Stochastic Runge-Kutta algorithm SRIC2 for Ito equations with commutative noise.
+`itoSRIC2(f, [g1,...,gm], y0, tspan)`: as above, with G matrix given as a separate function for each column (gives speedup for large m or complicated G).
+`itoSRID2(f, G, y0, tspan)`: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRID2 for Ito equations with diagonal noise.
+`itoSRA3(f, G, y0, tspan)`: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRA3 for Ito equations with additive noise.
+`itoSRI2W1(f, G, y0, tspan)`: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRI2W1 for Ito equations with scalar noise.
+`itoRI5(f, G, y0, tspan)`: the Rößler2010 order 2.0 weak Stochastic Runge-Kutta algorithm RI5 for Ito equations.
+`itoRI5(f, [g1,...,gm], y0, tspan)`: as above, with G matrix given as a separate function for each column (gives speedup for large m or complicated G).
+`stratSRA3(f, G, y0, tspan)`: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRS2 for Stratonovich equations with additive noise.
 For more information and advanced options see the documentation for each function.
 
 ##utility functions:
