@@ -28,11 +28,17 @@ These multiple integrals I and J are important building blocks that will be
 used by most of the higher-order algorithms that integrate multi-dimensional
 SODEs.
 
+Strong approximation
+--------------------
 We implement the method of Mrongowius and Rössler (2021) which improves
 the method of Wiktorsson (2001) by needing significantly less computational
 effort than Wiktorsson by approximating the the truncation term by some
 appropiate multivariate Gaussian random variable (see Section 5.2 of
 Mrongowius and Rössler (2021) for a detailed discussion).
+
+Weak approximation
+------------------
+We implement the method of Kloeden and Platen (1992) presented on page 225.
 
 References:
   P. Kloeden, E. Platen and I. Wright (1992) The approximation of multiple
@@ -41,8 +47,10 @@ References:
     Simulation of Iterated Ito Integrals for Multiple Independent Brownian
     Motions
   J. Mrongowius and A. Rössler (2021) On the Approximation and Simulation
-  of Iterated Stochastic Integrals and the Corresponding Levy Areas in 
-  Terms of a Multidimensional Brownian Motion
+    of Iterated Stochastic Integrals and the Corresponding Levy Areas in 
+    Terms of a Multidimensional Brownian Motion
+  P. Kloden and E. Platen (1992) Numerical Solution of Stochastic Differential
+    Equations, Third Printing
 """
 
 import numpy as np
@@ -159,3 +167,109 @@ def Jmr(dW, h, n=5):
     Atilde, I = Imr(dW, h, n)
     J = I + 0.5*h*np.eye(m).reshape((1, m, m))
     return (Atilde, J)
+	
+	
+	
+def Ihatkp(N, m, h):
+    """
+    - Created by Philip Schwedler, 06/2021
+    - Vector I representing three-point distribution for weak approximations
+      of the iterated stochastic integrals, using [Kloden and Platen (1992), p225]
+  
+    Parameters
+    ----------
+    N: int
+       number of time steps
+    m: int
+       number of random variables needed correspondiing to the dimension of the
+       Wiener processes
+    h: float
+       time step size
+	
+    Returns
+    --------
+    I: where I is an array of shape (N, m) representing at each time step
+       m realizations of the three-point distribution for the weak
+       approximation of the iterated stochastic integrals
+   
+    See also:
+       P. Kloeden and E. Platen (1992) Numerical Solution of Stochastic
+       Differential Equations, Third Printing
+    """
+    return np.random.choice(np.array([-np.sqrt(3.0*h), 0.0, np.sqrt(3.0*h)]), size=(N,m), p=np.array([1.0/6.0, 2.0/3.0, 1.0/6.0]))
+
+def Itildekp(N, m, h):
+    """
+    - Created by Philip Schwedler, 06/2021
+    - Vector I representing two-point distribution for weak approximations
+      of the iterated stochastic integrals, using [Kloden and Platen (1992), p225]
+
+    Parameters
+    ----------
+    N: int
+       number of time steps
+    m: int
+       number of random variables needed correspondiing to the dimension of the
+       Wiener processes
+    h: float
+       time step size
+
+    Returns
+    --------
+    I: where I is an array of shape (N, m) representing at each time step
+       m realizations of the two-point distribution for the weak
+       approximation of the iterated stochastic integrals
+
+    See also:
+       P. Kloeden and E. Platen (1992) Numerical Solution of Stochastic
+       Differential Equations, Third Printing
+    """
+    return np.random.choice(np.array([-np.sqrt(h), np.sqrt(h)]), size=(N,m), p=np.array([0.5, 0.5]))
+
+def Iweakkp(N, m, h, Ihat=None, Itilde=None):
+    """
+    - Created by Philip Schwedler, 06/2021
+    - Vector I representing weak approximations of the iterated stochastic integrals,
+      using [Kloden and Platen (1992), p225]
+
+    Parameters
+    ----------
+    N: int
+       number of time steps
+    m: int
+       number of random variables needed correspondiing to the dimension of the
+       Wiener processes
+    h: float
+       time step size
+    Ihat: array of shape (N, m)
+       three-point distribution needed for the weak approximation
+    Itilde: array of shape (N, m-1)
+       two-point distribution needed for the weak approximaton
+
+    Returns
+    --------
+    I: where I is an array of shape (N, m, m) giving an m x m matrix
+       of repeated weak Ito integrals values for each of the
+       N time intervals.
+
+    See also:
+        P. Kloeden and E. Platen (1992) Numerical Solution of Stochastic
+        Differential Equations, Third Printing
+	"""
+    if Ihat is None:
+        # pre-generate samples Ihat
+        Ihat = Ihatkp(N,m,h) # shape (N,m)
+    if Itilde is None:
+        # pre-generate samples Itilde
+        Itilde = Itildekp(N,m-1,h) # shape (N,m-1)
+    sqrth = np.sqrt(h)
+    M = m*(m-1)//2
+    Iweak = np.einsum('ij,ik->ijk', Ihat, Ihat)
+    for k in range(0,m):
+        Iweak[:,k,k] = Iweak[:,k,k] - h
+        for l in range(0,m):
+            if(k<l):
+                Iweak[:,k,l] = Iweak[:,k,l] - sqrth*Itilde[:,k]
+            elif(k>l):
+                Iweak[:,k,l] = Iweak[:,k,l] + sqrth*Itilde[:,l]			
+    return 0.5*Iweak
