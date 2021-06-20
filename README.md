@@ -17,7 +17,7 @@ sdeint2 is a collection of numerical algorithms for integrating Ito and Stratono
 * `itoRI5(f, G, y0, tspan)`: the Rößler2009 order 2.0 weak Stochastic Runge-Kutta algorithm RI5 for Ito equations.
 * `itoRI5(f, [g1,...,gm], y0, tspan)`: as above, with G matrix given as a separate function for each column (gives speedup for large m or complicated G).
 * `stratSRA3(f, G, y0, tspan)`: the Rößler2010 order 1.5 strong Stochastic Runge-Kutta algorithm SRS2 for Stratonovich equations with additive noise.
-For more information and advanced options see the documentation for each function.
+* For more information and advanced options see the documentation for each function.
 
 ## Utility Functions:
 
@@ -61,5 +61,5 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-This code is partially based on the source code of the Python Package
+This code is partially based on the functions of the Python Package
 [sdeint](https://github.com/mattja/sdeint) written by Matthew J. Aburn & Yoav Ram.
